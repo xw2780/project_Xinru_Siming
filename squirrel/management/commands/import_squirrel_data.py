@@ -21,23 +21,23 @@ class Command(BaseCommand):
                 if row['Age'] not in ['Adult', 'Juvenile']:
                     s_age = ''
                 elif row['Age'] == 'Adult':
-                    s_age = Squirrel.ADULT
+                    s_age = Squirrel.Adult
                 elif row['Age'] == 'Juvenile':
-                    s_age = Squirrel.JUVENILE
+                    s_age = Squirrel.Juvenile
                 if row['Primary Fur Color'] not in ['Gray', 'Cinnamon','Black']:
                     s_color = ''
                 elif row['Primary Fur Color'] == 'Gray':
-                    s_color = Squirrel.GRAY
+                    s_color = Squirrel.Gray
                 elif row['Primary Fur Color'] == 'Cinnamon':
-                    s_color = Squirrel.CINNAMON
+                    s_color = Squirrel.Cinnamon          
                 elif row['Primary Fur Color'] == 'Black':
-                    s_color = Squirrel.BLACK
+                    s_color = Squirrel.Black
                 if row['Location'] not in ['Ground Plane', 'Above Ground']:
                     s_location = ''
                 elif row['Location'] == 'Ground Plane':
-                    s_location = Squirrel.GROUND_PLANE
+                    s_location = Squirrel.Ground_plane
                 elif row['Location'] == 'Above Ground':
-                    s_location = Squirrel.ABOVE_GROUND
+                    s_location = Squirrel.Above_ground
                     
                 s = Squirrel(
                     longitude = row['X'],

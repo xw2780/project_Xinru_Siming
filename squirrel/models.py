@@ -61,11 +61,11 @@ class Squirrel(models.Model):
             blank = True,
     )
     
-    GROUND_PLANE = 'ground plane'
-    ABOVE_GROUND = 'above ground'
+    Ground_plane = 'ground plane'
+    Above_ground = 'above ground'
     LOCATION_CHOICES = (
-            (GROUND_PLANE,'Ground Plane'),
-            (ABOVE_GROUND,'Above Ground'),
+            (Ground_plane,'Ground Plane'),
+            (Above_ground,'Above Ground'),
     )        
     location = models.CharField(
             max_length = 50,
