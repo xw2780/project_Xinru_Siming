@@ -3,49 +3,68 @@ from  django.core.management.base import BaseCommand
 import datetime
 from squirrel.models import Squirrel
 
+def convertBool(s):
+    if s.lower() == "true":
+        return True
+    else:
+        return False
+    
 class Command(BaseCommand):
     help = 'Import squirrel sightings data'
-
     def add_arguments(self,parser):
         parser.add_argument('squirrel_data', help='file of squirrel data')
-
     def handle(self, *args, **options):
         file_ = options['squirrel_data']
-
         with open(file_) as fp:
             reader = csv.DictReader(fp)
-
             for row in reader:
-                try:
-                        _, created = Squirrel.objects.get_or_create(
-                            latitude=float(row[0]),
-                            longitude=float(row[1]),
-                            unique_squirrel_id=row[2],
-                            shift=row[4],
-                            date=datetime.date(int(row[5][-4:]),int(row[5][0:2]),int(row[5][2:4])),
-                            age=row[7], 
-                            primary_color=row[8],
-                            location=row[12],
-                            specific_location=row[14],
-                            running=str_bool(row[15]),
-                            chasing=str_bool(row[16]),
-                            climbing=str_bool(row[17]),
-                            eating=str_bool(row[18]),
-                            foraging=str_bool(row[19]),
-                            other_activities=row[20],
-                            kuks=str_bool(row[21]),
-                            quaas=str_bool(row[22]),
-                            moans=str_bool(row[23]),
-                            tail_flags=str_bool(row[24]),
-                            tail_twitches=str_bool(row[25]),
-                            approaches=str_bool(row[26]),
-                            indifferent=str_bool(row[27]),
-                            runs_from=str_bool(row[28])
-                        )
-                    except:
-                        pass
-
+                if row['Age'] not in ['Adult', 'Juvenile']:
+                    s_age = ''
+                elif row['Age'] == 'Adult':
+                    s_age = Squirrel.ADULT
+                elif row['Age'] == 'Juvenile':
+                    s_age = Squirrel.JUVENILE
+                if row['Primary Fur Color'] not in ['Gray', 'Cinnamon','Black']:
+                    s_color = ''
+                elif row['Primary Fur Color'] == 'Gray':
+                    s_color = Squirrel.GRAY
+                elif row['Primary Fur Color'] == 'Cinnamon':
+                    s_color = Squirrel.CINNAMON
+                elif row['Primary Fur Color'] == 'Black':
+                    s_color = Squirrel.BLACK
+                if row['Location'] not in ['Ground Plane', 'Above Ground']:
+                    s_location = ''
+                elif row['Location'] == 'Ground Plane':
+                    s_location = Squirrel.GROUND_PLANE
+                elif row['Location'] == 'Above Ground':
+                    s_location = Squirrel.ABOVE_GROUND
+                    
+                s = Squirrel(
+                    longitude = row['X'],
+                    latitude = row['Y'],
+                    unique_squirrel_id = row['Unique Squirrel ID'],
+                    shift = row['Shift'],
+                    date = datetime.datetime.strptime(row['Date'],'%m%d%Y'),
+                    age = s_age,
+                    primary_color = s_color,
+                    location = s_location,
+                    specific_location = row['Specific Location'],
+                    running = convertBool(row['Running']),
+                    chasing = convertBool(row['Chasing']),
+                    climbing = convertBool(row['Climbing']),
+                    eating = convertBool(row['Eating']),
+                    foraging = convertBool(row['Foraging']),
+                    other_activities = row['Other Activities'],
+                    kuks = convertBool(row['Kuks']),
+                    quaas = convertBool(row['Quaas']),
+                    moans = convertBool(row['Moans']),
+                    tail_flags = convertBool(row['Tail flags']),
+                    tail_twitches = convertBool(row['Tail twitches']),
+                    approaches = convertBool(row['Approaches']),
+                    indifferent = convertBool(row['Indifferent']),
+                    runs_from = convertBool(row['Runs from']),
+                    )
+                s.save()
         msg = f'You are importing from {file_}'
-        self.stdout.write(self.stype.SUCCESS(msg))
-
+        self.stdout.write(self.style.SUCCESS(msg))
 

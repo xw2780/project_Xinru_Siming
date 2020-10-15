@@ -66,7 +66,7 @@ class Squirrel(models.Model):
     LOCATION_CHOICES = (
             (GROUND_PLANE,'Ground Plane'),
             (ABOVE_GROUND,'Above Ground'),
-            )
+    )        
     location = models.CharField(
             max_length = 50,
             help_text = _('location of sighting'),
