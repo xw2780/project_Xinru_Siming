@@ -25,8 +25,8 @@ class Squirrel(models.Model):
             blank=True,
     )
 
-    date = models.Datefield(
-            help_text = _('Date of sighting')
+    date = models.DateField(
+            help_text = _('Date of sighting'),
             blank = True,
             null = True,
     )
@@ -49,7 +49,7 @@ class Squirrel(models.Model):
     Black = 'Black'
     Gray = 'Gray'
     Cinnamon = 'Cinnamon'
-    COLOR_CHOICE = (
+    COLOR_CHOICES = (
             (Black, 'Black'),
             (Gray, 'Gray'),
             (Cinnamon, 'Cinnamon'),
@@ -60,12 +60,13 @@ class Squirrel(models.Model):
             choices = COLOR_CHOICES,
             blank = True,
     )
-
-    LOCATION_CHOICE = (
-            (Ground_Plane, 'Ground Plane'),
-            (Above_Ground, 'Above Ground'),
-            (None, ''),
-    )
+    
+    GROUND_PLANE = 'ground plane'
+    ABOVE_GROUND = 'above ground'
+    LOCATION_CHOICES = (
+            (GROUND_PLANE,'Ground Plane'),
+            (ABOVE_GROUND,'Above Ground'),
+            )
     location = models.CharField(
             max_length = 50,
             help_text = _('location of sighting'),
