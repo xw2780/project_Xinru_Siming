@@ -7,11 +7,19 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib import messages
 from .models import Squirrel
 # Create your views here.
-def listall_view(request):
+def sightings_view(request):
     squirrels = Squirrel.objects.all()
     fields = ['unique_squirrel_id','longtitude','latitude','date']
     context = {
             'squirrels':squirrels,
-           # 'fields':fields,
+            'fields':fields,
             }
-    return render(request, 'squirrel/listall.html', context)
+    return render(request, 'squirrel/sightings.html', context)
+
+def map_view(request):
+    squirrels = Squirrel.objects.all()[:100]
+    context = {
+            'squirrels':squirrels,
+            }
+    return render(request, 'squirrel/map.html', context)
+
