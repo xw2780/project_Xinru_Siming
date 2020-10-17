@@ -66,6 +66,10 @@ class Command(BaseCommand):
                     runs_from = convertBool(row['Runs from']),
                     )
                 s.save()
+        for row in Squirrel.objects.all():
+            if Squirrel.objects.filter(unique_squirrel_id = row.unique_squirrel_id).count() > 1:
+                row.delete()
+
         msg = f'You are importing from {file_}'
         self.stdout.write(self.style.SUCCESS(msg))
 
