@@ -14,6 +14,7 @@ class Command(BaseCommand):
     def add_arguments(self,parser):
         parser.add_argument('squirrel_data', help='file of squirrel data')
     def handle(self, *args, **options):
+        #Squirrel.objects.all().delete()
         file_ = options['squirrel_data']
         with open(file_) as fp:
             reader = csv.DictReader(fp)
