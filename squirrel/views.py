@@ -7,6 +7,7 @@ import numpy as n
 from datetime import date,datetime
 from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib import messages
+from django.shortcuts import redirect
 
 from .models import Squirrel
 from .forms import SquirrelForm
@@ -32,14 +33,13 @@ def map_view(request):
 
 
 
-
 def add_view(request):
-    squirrels = Squirrel.objects.all()
+    #squirrels = Squirrel.objects.all()
     if request.method == 'POST':
         form = SquirrelForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('squirrel/sightings.html')
+            return redirect(f'/sightings/')
         else:
             return JsonResponse({'errors': form.errors}, status=400)
     else:
@@ -56,14 +56,14 @@ def stats_view(request):
     n = squirrels.count()
     #shift
     AM_n = squirrels.filter(shift='AM').count()
-    PM_n = squirrels.filter(Shift='PM').count()
+    PM_n = squirrels.filter(shift='PM').count()
     AM_pct = AM_n/n
     AM_pct = "{:.2%}".format(AM_pct)
     PM_pct = PM_n/n
     PM_pct = "{:.2%}".format(PM_pct)
     #age
-    Juvenile_n = squirrels.filter(age='juvenile').count()
-    Adult_n = squirrels.filter(age='adult').count()
+    Juvenile_n = squirrels.filter(age='Juvenile').count() 
+    Adult_n = squirrels.filter(age='Adult').count()
     Juvenile_pct = Juvenile_n/n
     Juvenile_pct = "{:.2%}".format(Juvenile_pct)
     Adult_pct = Adult_n/n
@@ -79,11 +79,11 @@ def stats_view(request):
     Cinnamon_pct = Cinnamon_n/n
     Cinnamon_pct = "{:.2%}".format(Cinnamon_pct)
     #location
-    Above_Ground_n = squirrels.filter(location='Above_ground').count()
-    Ground_Plane_n = squirrels.filter(location='Ground_plane').count()
+    Above_Ground_n = squirrels.filter(location='above ground').count()
+    Ground_Plane_n = squirrels.filter(location='ground plane').count()
     Above_Ground_pct = Above_Ground_n/n
     Above_Ground_pct = "{:.2%}".format(Above_Ground_pct)
-    Ground_Plane_pct = Ground_Plane_n/Ground_plane
+    Ground_Plane_pct = Ground_Plane_n/n
     Ground_Plane_pct= "{:.2%}".format(Ground_Plane_pct)
     #movement
     Approaches_pct = squirrels.filter(approaches=True).count()/n
@@ -105,8 +105,7 @@ def stats_view(request):
             'Location_pct': {'Above_Ground':Above_Ground_pct, 'Ground_Plane':Ground_Plane_pct},
             'Movements': {'Approaches_pct':Approaches_pct, 'Indifferent_pct':Indifferent_pct,'Runs_From_pct':Runs_From_pct},
             }
-
-    return render(request, 'squirrel/sightings/stats.html', context)
+    return render(request, 'squirrel/stats.html', {'context':context})
 
 
 
@@ -116,7 +115,7 @@ def update_view(request,unique_squirrel_id):
         form = SquirrelForm(request.POST, instance = squirrel)
         if form.is_valid():
             form.save()
-            return redirect('squirrel/sightings.html')
+            return redirect(f'/sightings/')
         else:
             return JsonResponse({'errors': form.errors}, status=400)
     else:
