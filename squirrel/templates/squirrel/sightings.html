@@ -1,17 +1,55 @@
-<!doctype html>
-<html>
-<body>
-<ul>
-<li><a href="stats/">click to check sightings'stats</a></li>
-<li><a href="add/">click to add sightings</a></li>
-</ul>
-<ul>
-{% for squirrel in squirrels %}
-<li>{{ squirrel.unique_squirrel_id}}</li>
-<li>{{ squirrel.date }}</li>
-<li><a href="{{squirrel.unique_squirrel_id}}/">click to update this sighting</a></li>
-{% endfor %}
-</ul>
-</body>
+<html lang='en'>
+        <head>
+                <title>A  List of Squirrel Sightings</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        </head>
+        <body>
+<style>
+      body {
+        padding-left: 10px; padding-right: 10px;
+      }
+</style>
+		<p>
+		<br>
+		<strong><h2> <img src="https://image.flaticon.com/icons/svg/2291/2291277.svg" style="width:60px" class="rounded" alt="..." >    Welcome to the World of Squirrels!    
+</strong></h2>
+		<hr>
+		</p>
+		<p>
+		<ul>
+			<h5><li><a href="stats/" class="badge badge-info">STATS</a> Click the button to see the descriptive statistical analysis.</li></h5>
+			<h5><li><a href="add/"  class="badge badge-warning">ADD</a> Saw a squirrel? Click the button to add a new squirrel sighting.</li></h5>
+		</ul>
+		</p>
+		<br>
+		<div>
+                <table class="table">
+			<div class="alert alert-dark text-center" role="alert">
+				<h5><strong> Overview: Squirrel Sighting Records </strong></h5>
+			</div>
+			<thead class = "thead-dark">
+                                <tr>
+                                        <th scope = "col">Unique Squirrel Id</th>
+                                        <th scope = "col">Date</th>
+                                        <th scope = "col">Link</th>
+                                </tr>
+                        </thead>
+
+                        <tbody>
+                        {% for squirrel in squirrels %}
+                                <tr>
+                                        <td><a href="{{squirrel.unique_squirrel_id}}/">{{ squirrel.unique_squirrel_id }}</a></td>
+                                        <td>{{ squirrel.date }}</td>
+                                        <td><a href="{{squirrel.unique_squirrel_id}}/">click for more information</a></td>
+                                </tr>
+                        {% endfor %}
+                        </tbody>
+                </table>
+		</div>
+		<br>
+		<br>
+		<div style=font-size:12px>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        </body>
 </html>
+
 
