@@ -11,6 +11,7 @@ from django.shortcuts import redirect
 
 from .models import Squirrel
 from .forms import SquirrelForm
+from .forms import SquirrelFormAll
 
 # Create your views here.
 def homepage_view(request):
@@ -36,14 +37,14 @@ def map_view(request):
 def add_view(request):
     #squirrels = Squirrel.objects.all()
     if request.method == 'POST':
-        form = SquirrelForm(request.POST)
+        form = SquirrelFormAll(request.POST)
         if form.is_valid():
             form.save()
             return redirect(f'/sightings/')
         else:
             return JsonResponse({'errors': form.errors}, status=400)
     else:
-        form = SquirrelForm()
+        form = SquirrelFormAll()
 
     context = {
             'form':form,
