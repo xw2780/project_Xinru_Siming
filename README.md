@@ -5,7 +5,7 @@ Squirrel Tracker is a web application that can keep track of all the known squir
 Eccentric billionaire Joffrey Hosencratz relayed that his most recent trip to Sedona, AZ has left him in a bit of trouble. He fancies the show Rick and Morty and a particular scene coupled with a traumatic childhood squirrel experience and a bad crystal bath experience in Sedona has left him wanting. He would like to start keeping track of all the known squirrels and plans to start with Central Park.
 ##Data Source
 2018 Central Park Squirrel Census
-##Dependencies
+#3Dependencies
 Django
 ##Key Features
 ###Management Commands
@@ -29,4 +29,5 @@ Group Name: Xinru & Siming
 Section Number: 01
 UNIs: [xw2780, sz2944]
 GitHub link: https://github.com/xw2780/project_Xinru_Siming
+
 
