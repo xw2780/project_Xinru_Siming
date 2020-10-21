@@ -1,4 +1,4 @@
-
+{% load static %}
 <!doctype html>
 <html>
         <head>
@@ -7,10 +7,18 @@
  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         </head>
         <body>
-<style>body{padding-left:10px; padding-right:10px;}</style>
+<style>
+	body{padding-left:10px; padding-right:10px;
+	color: white;
+        background-image: url({% static 'squirrel/images/update.jpeg'%});
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+	}
+</style>
                 <p>
                 <br>
-		<strong><h2><img src="https://image.flaticon.com/icons/svg/2291/2291277.svg" style="width:60px" class="rounded" alt="..." >   Update the Squirrel Sighting   </strong>
+		<strong><h2><img src="https://www.flaticon.com/svg/static/icons/svg/1864/1864534.svg" style="width:60px" class="rounded" alt="..." >   Update the Squirrel Sighting   </strong>
                 </h2>
                 <p>Please use the following form to update the squirrel sighting</p>
                 <hr>

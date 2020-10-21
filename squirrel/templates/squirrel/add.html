@@ -1,4 +1,4 @@
-
+{% load static %}
 <!doctype html>
 <html>
         <head>
@@ -7,19 +7,28 @@
  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         </head>
         <body>
-<style>body{padding-left:10px; padding-right:10px;}</style>
+<style>
+	body
+	{padding-left:10px; padding-right:10px;
+	color: white;
+	background-image: url({% static 'squirrel/images/add.jpg'%});
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	}
+</style>
 		<p>
 		<br>
-		<strong><h2><img src=" https://image.flaticon.com/icons/svg/2291/2291277.svg" style="width:60px" class="rounded" alt="..." >   Saw a new Squirrel? </strong>
+		<strong><h2><img src="https://www.flaticon.com/svg/static/icons/svg/1864/1864534.svg" style="width:60px" class="rounded" alt="..." >   Saw a new Squirrel? </strong>
 		</h2>
-		<p>Please fill out the following information to share it with us :)</p>
+		<p>Please fill out the following table to share your findings with us :)</p>
 		<hr>
 		<br>
                 <form method='post'>
                         {% csrf_token %}
                         {{form.as_p}}
                         <br>
-			<p>Thanks for sharing! <img src="https://image.flaticon.com/icons/svg/1140/1140163.svg" style="width:30px" class="rounded" alt="..." ></p>
+			<p>Thanks for sharing! Looking forward to your next visit! <img src="https://image.flaticon.com/icons/svg/3158/3158992.svg" style="width:30px" class="rounded" alt="..." ></p>
                         <input class = "btn btn-primary" type = "submit" name = "add">
 			<br>
 		</form>

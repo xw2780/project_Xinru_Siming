@@ -1,3 +1,4 @@
+{% load static %}
 <html lang='en'>
         <head>
                 <title>A  List of Squirrel Sightings</title>
@@ -7,11 +8,15 @@
 <style>
       body {
         padding-left: 10px; padding-right: 10px;
+	background-image: url({% static 'squirrel/images/sightings.jpg'%});
+     	background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
       }
 </style>
 		<p>
 		<br>
-		<strong><h2> <img src="https://image.flaticon.com/icons/svg/2291/2291277.svg" style="width:60px" class="rounded" alt="..." >    Welcome to the World of Squirrels!    
+		<strong><h2> <img src="https://www.flaticon.com/svg/static/icons/svg/1864/1864534.svg" style="width:60px" class="rounded" alt="..." >    Welcome to the World of Squirrels!    
 </strong></h2>
 		<hr>
 		</p>
@@ -40,7 +45,7 @@
                                 <tr>
 					<td>{{ squirrel.unique_squirrel_id }}</td>
                                         <td>{{ squirrel.date }}</td>
-                                        <td><a href="{{squirrel.unique_squirrel_id}}/">click for more information</a></td>
+                                        <td><a style="color:#030303" href="{{squirrel.unique_squirrel_id}}/">click for more information</a></td>
                                 </tr>
                         {% endfor %}
                         </tbody>
